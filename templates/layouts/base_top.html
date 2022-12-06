@@ -1,0 +1,31 @@
+{{ define "base_top" }}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="/css/bootadmin.min.css">
+
+    <title>TalentApp</title>
+</head>
+<body class="bg-light">
+
+<nav class="navbar navbar-expand navbar-dark bg-primary">
+    <a class="sidebar-toggle mr-3" href="#"><i class="fa fa-bars"></i></a>
+    <a class="navbar-brand" href="#">TALENTAPP</a>
+</nav>
+
+<div class="d-flex">
+    <div class="sidebar sidebar-dark bg-dark">
+        <ul class="list-unstyled">
+            <li><a href="/web/candidate"><i class="fa fa-fw fa-user"></i> Candidate</a></li>
+            <li><a href="/web/job"><i class="fa fa-fw fa-book"></i> Job</a></li>
+            <li><a href="/web/recruitment"><i class="fa fa-fw fa-chart-line"></i> Recruitment</a></li>
+        </ul>
+    </div>
+
+    <div class="content p-4">
+{{ end }}

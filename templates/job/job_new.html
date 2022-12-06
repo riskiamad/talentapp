@@ -1,0 +1,46 @@
+{{ define "job_new" }}
+{{ template "base_top" .}}
+<h2 class="mb-4">New Job</h2>
+
+{{ if .error }}
+<div class="alert alert-danger">
+    {{ .error }}
+</div>
+{{ end }}
+
+<div class="card mb-4">
+    <div class="card-body">
+        <form action="/web/job" method="POST">
+            <div class="form-group">
+                <label for="position">Position</label>
+                <input type="text" name="position" placeholder="Enter Position" required class="form-control" value="{{ .Position }}">
+            </div>
+
+            <div class="form-group">
+                <label for="department">Department</label>
+                <input type="text" name="department" placeholder="Enter Department" required class="form-control" value="{{ .Department }}">
+            </div>
+
+            <div class="form-group">
+                <label for="requester">Requester</label>
+                <input type="text" name="requester" placeholder="Enter requester" required class="form-control" value="{{ .Requester }}">
+            </div>
+
+            <div class="form-group">
+                <label for="JobDescription">Job Description</label>
+                <textarea name="JobDescription" cols="30" rows="5" placeholder="Enter Job Description" required class="form-control">{{ .JobDescription }}</textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="criteria">Criteria</label>
+                <textarea name="criteria" cols="30" rows="5" placeholder="Enter Criteria" required class="form-control">{{ .Criteria }}</textarea>
+            </div>
+
+            <div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
+{{ template "base_bottom" .}}
+{{ end }}

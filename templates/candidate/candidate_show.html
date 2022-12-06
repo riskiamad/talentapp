@@ -1,0 +1,31 @@
+{{ define "candidate_show" }}
+{{ template "base_top" .}}
+<h2 class="mb-4">Candidate</h2>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <form>
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" name="name" disabled class="form-control" value="{{ .candidate.Name }}">
+            </div>
+
+            <div class="form-group">
+                <label for="address">Address</label>
+                <textarea name="address" cols="30" rows="10" placeholder="Enter address" disabled class="form-control">{{ .candidate.Address }}</textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="experience">Experience</label>
+                <input type="text" name="experience" placeholder="Enter experience" disabled class="form-control" value="{{ .candidate.Experience }}">
+            </div>
+
+            <div class="form-group">
+                <label for="willing_to_relocate">Willing To Relocate</label>
+                <input type="text" name="willing_to_relocate" placeholder="Enter experience" disabled class="form-control" value="{{ .candidate.WillingToRelocate }}">
+            </div>
+        </form>
+    </div>
+</div>
+{{ template "base_bottom" .}}
+{{ end }}

@@ -1,0 +1,11 @@
+{{ define "error" }}
+{{ template "base_top" .}}
+<div class="alert alert-danger">
+    {{ if .error }}
+        Problem occured, {{ .error }}
+    {{ else }}
+        Problem occured, Stay Calm
+    {{ end }}
+</div>
+{{ template "base_bottom" .}}
+{{ end }}

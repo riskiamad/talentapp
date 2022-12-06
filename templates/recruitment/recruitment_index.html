@@ -1,0 +1,40 @@
+{{ define "recruitment_index" }}
+{{ template "base_top" .}}
+<h2 class="mb-4">List of Recruitments</h2>
+
+<a href="/web/recruitment/new" class="btn btn-primary mb-3"><i class="fa fa-plus"></i> New Recruitment</a>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <table class="table mb-0">
+            <thead class="thead-light">
+            <tr>
+                <th>Position</th>
+                <th>Department</th>
+                <th>Status</th>
+                <th>Deadline</th>
+                <th></th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {{ range .recruitments }}
+            <tr>
+                <td>{{ .Job.Position }}</td>
+                <td>{{ .Job.Department }}</td>
+                <td class="column-verticallineMiddle form-inline">{{ .Status }}
+                    <form action="/web/recruitment/edit/{{ .ID }}/status" method="post">
+                        <input type="hidden" name="status" value="{{ .Status }}" required class="form-control">
+                        <button type="submit" class="btn btn-link"><i class="fa fa-edit"></i></button>
+                    </form>
+                </td>
+                <td>{{ .DeadlineString }}</td>
+                <td><a href="/web/recruitment/show/{{ .ID }}"><i class="fa fa-search"></i></a></td>
+            </tr>
+            {{ end }}
+            </tbody>
+        </table>
+    </div>
+</div>
+{{ template "base_bottom" .}}
+{{ end }}

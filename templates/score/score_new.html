@@ -1,0 +1,70 @@
+{{ define "score_new" }}
+{{ template "base_top" .}}
+<h2 class="mb-4">New Candidate Score</h2>
+
+{{ if .error }}
+<div class="alert alert-danger">
+    {{ .error }}
+</div>
+{{ end }}
+
+<div class="card mb-4">
+    <div class="card-body">
+        <form action="/web/recruitment/{{ .recruitmentID }}/score" method="POST">
+            <div class="form-group">
+                <label for="CandidateID">Candidate</label>
+                <select name="CandidateID" class="form-control">
+                    <option value="">-- Select Candidate --</option>
+                    {{ range .candidates }}
+                            <option value="{{ .ID }}">{{ .Name }}</option>
+                    {{ end }}
+                </select>
+
+            </div>
+
+            <div class="form-group">
+                <label for="WillingToRelocate">Willing To Relocate</label>
+                <select name="WillingToRelocate" class="form-control">
+                    <option value="">-- Select Option --</option>
+                    <option value="yes">yes</option>
+                    <option value="no">no</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="experience">Experience</label>
+                <input type="number" name="experience" placeholder="Enter experience in year(s)" required class="form-control" value="{{ .Experience }}">
+            </div>
+
+            <div class="form-group">
+                <label for="AttitudeScore">Attitude Score</label>
+                <select name="AttitudeScore" class="form-control">
+                    <option value="">-- Select Option --</option>
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="C">C</option>
+                    <option value="D">D</option>
+                    <option value="E">E</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="SkillScore">Skill Score</label>
+                <select name="SkillScore" class="form-control">
+                    <option value="">-- Select Option --</option>
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="C">C</option>
+                    <option value="D">D</option>
+                    <option value="E">E</option>
+                </select>
+            </div>
+
+            <div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
+{{ template "base_bottom" .}}
+{{ end }}

@@ -1,0 +1,37 @@
+{{ define "recruitment_new" }}
+{{ template "base_top" .}}
+<h2 class="mb-4">New Recruitment</h2>
+
+{{ if .error }}
+<div class="alert alert-danger">
+    {{ .error }}
+</div>
+{{ end }}
+
+<div class="card mb-4">
+    <div class="card-body">
+        <form action="/web/recruitment" method="POST">
+            <div class="form-group">
+                <label for="JobID">Job</label>
+                <select name="JobID" class="form-control">
+                    <option value="">-- Select job --</option>
+                    {{ range .jobs }}
+                            <option value="{{ .ID }}">{{ .Position }}</option>
+                    {{ end }}
+                </select>
+
+            </div>
+
+            <div class="form-group">
+                <label for="deadline">Deadline</label>
+                <input type="date" name="deadline" required class="form-control" value="{{ .Now }}" min="2022-01-01">
+            </div>
+
+            <div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
+{{ template "base_bottom" .}}
+{{ end }}

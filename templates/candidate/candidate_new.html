@@ -1,0 +1,45 @@
+{{ define "candidate_new" }}
+{{ template "base_top" .}}
+<h2 class="mb-4">New Candidate</h2>
+
+{{ if .error }}
+<div class="alert alert-danger">
+    {{ .error }}
+</div>
+{{ end }}
+
+<div class="card mb-4">
+    <div class="card-body">
+        <form action="/web/candidate" method="POST">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" name="name" placeholder="Enter name" required class="form-control" value="{{ .Name }}">
+            </div>
+
+            <div class="form-group">
+                <label for="address">Address</label>
+                <textarea name="address" cols="30" rows="5" placeholder="Enter Address" required class="form-control">{{ .Address }}</textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="experience">Experience</label>
+                <input type="number" name="experience" placeholder="Enter experience in year(s)" required class="form-control" value="{{ .Experience }}">
+            </div>
+
+            <div class="form-group">
+                <label for="WillingToRelocate">Willing To Relocate</label>
+                <select name="WillingToRelocate" class="form-control">
+                    <option value="">-- Select option --</option>
+                    <option value="yes">yes</option>
+                    <option value="no">no</option>
+                </select>
+            </div>
+
+            <div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
+{{ template "base_bottom" .}}
+{{ end }}

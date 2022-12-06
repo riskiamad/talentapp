@@ -1,0 +1,40 @@
+{{ define "score_index" }}
+{{ template "base_top" .}}
+<h2 class="mb-4">List of Candidate Score</h2>
+
+<a href="/web/recruitment/{{ .recruitmentID }}/score/new" class="btn btn-primary mb-3"><i class="fa fa-plus"></i> New Candidate Score</a>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <table class="table mb-0">
+            <thead class="thead-light">
+            <tr>
+                <th>Candidate Name</th>
+                <th>Position</th>
+                <th>Department</th>
+                <th>Willing To Relocate</th>
+                <th>Experience in year(s)</th>
+                <th>Attitude Score</th>
+                <th>Skill Score</th>
+                <th>Overall Score</th>
+            </tr>
+            </thead>
+            <tbody>
+            {{ range .scores }}
+            <tr>
+                <td>{{ .Candidate.Name }}</td>
+                <td>{{ .Recruitment.Job.Position }}</td>
+                <td>{{ .Recruitment.Job.Department }}</td>
+                <td>{{ .Candidate.WillingToRelocate }}</td>
+                <td>{{ .Candidate.Experience }}</td>
+                <td>{{ .AttitudeScore }}</td>
+                <td>{{ .SkillScore }}</td>
+                <td>{{ .OverallScore }}</td>
+            </tr>
+            {{ end }}
+            </tbody>
+        </table>
+    </div>
+</div>
+{{ template "base_bottom" .}}
+{{ end }}

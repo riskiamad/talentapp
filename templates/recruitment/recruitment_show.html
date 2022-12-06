@@ -1,0 +1,35 @@
+{{ define "recruitment_show" }}
+{{ template "base_top" .}}
+<h2 class="mb-4">Recruitment</h2>
+
+
+<a href="/web/recruitment/show/{{ .recruitment.ID }}/score" class="btn btn-primary mb-3"><i class="fa fa-bars"></i> View Score</a>
+<a href="/web/recruitment/{{ .recruitment.ID }}/score/new" class="btn btn-primary mb-3"><i class="fa fa-plus"></i> Insert Score</a>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <form>
+            <div class="form-group">
+                <label for="position">Position</label>
+                <input type="text" name="position" disabled class="form-control" value="{{ .recruitment.Job.Position }}">
+            </div>
+
+            <div class="form-group">
+                <label for="department">Department</label>
+                <input type="text" name="department" disabled class="form-control" value="{{ .recruitment.Job.Department }}">
+            </div>
+
+            <div class="form-group">
+                <label for="status">Status</label>
+                <input type="text" name="status" disabled class="form-control" value="{{ .recruitment.Status }}">
+            </div>
+
+            <div class="form-group">
+                <label for="deadline">Deadline</label>
+                <input type="text" name="deadline" disabled class="form-control" value="{{ .recruitment.DeadlineString }}">
+            </div>
+        </form>
+    </div>
+</div>
+{{ template "base_bottom" .}}
+{{ end }}

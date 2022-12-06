@@ -1,0 +1,36 @@
+{{ define "job_show" }}
+{{ template "base_top" .}}
+<h2 class="mb-4">Job</h2>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <form>
+            <div class="form-group">
+                <label for="position">Position</label>
+                <input type="text" name="position" disabled class="form-control" value="{{ .job.Position }}">
+            </div>
+
+            <div class="form-group">
+                <label for="department">Department</label>
+                <input type="text" name="department" disabled class="form-control" value="{{ .job.Department }}">
+            </div>
+
+            <div class="form-group">
+                <label for="requester">Requester</label>
+                <input type="text" name="requester" disabled class="form-control" value="{{ .job.Requester }}">
+            </div>
+
+            <div class="form-group">
+                <label for="job_description">Job Description</label>
+                <textarea name="job_description" cols="30" rows="10" disabled class="form-control">{{ .job.JobDescription }}</textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="criteria">Criteria</label>
+                <textarea name="criteria" cols="30" rows="10" disabled class="form-control">{{ .job.Criteria }}</textarea>
+            </div>
+        </form>
+    </div>
+</div>
+{{ template "base_bottom" .}}
+{{ end }}
