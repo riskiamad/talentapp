@@ -1,0 +1,41 @@
+version: '3.3'
+services:
+  app:
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    restart: always
+    ports:
+      - "8000:8000"
+    expose:
+      - '8000'
+    deploy:
+      mode: replicated
+      replicas: 1
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'talentapp'
+      MYSQL_ROOT_PASSWORD: 'password'
+    ports:
+      - '3305:3306'
+    volumes:
+      - my-db:/var/lib/mysql
+
+  db_seeder:
+    image: mysql:8.0
+    volumes:
+      - ./driver/db/mysql/migrations/0001_InitTableStructure.up.sql:/docker-entrypoint-initdb.d/init.sql
+    environment:
+      MYSQL_DATABASE: 'talentapp'
+      MYSQL_ROOT_PASSWORD: 'password'
+    entrypoint: [ "bash", "-c", "sleep 10 && mysql --user=root --password=password --host=db --port=3306 talentapp < /docker-entrypoint-initdb.d/init.sql && exit"]
+    depends_on:
+      - db
+
+volumes:
+  my-db:
