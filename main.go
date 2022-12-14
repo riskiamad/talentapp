@@ -11,6 +11,7 @@ import (
 	"github.com/joho/godotenv"
 	_ "github.com/mattes/migrate/source/file"
 	"log"
+	"os"
 	"talentapp/delivery"
 	"talentapp/driver/db/mysql"
 	"talentapp/handler"
@@ -42,11 +43,9 @@ func init() {
 		log.Fatal(err)
 	}
 
-	if err = m.Up(); err != nil {
+	if err = m.Up(); err != nil && err.Error() != "no change" {
 		log.Fatal(err)
 	}
-	defer m.Close()
-
 }
 
 func main() {
@@ -101,7 +100,7 @@ func main() {
 	jobHandler.Router(app)
 	candidateHandler.Router(app)
 
-	err := app.Listen("0.0.0.0:8000")
+	err := app.Listen(":" + os.Getenv("PORT"))
 	if err != nil {
 		log.Fatal(err)
 	}
