@@ -6,11 +6,12 @@ This is for Decision Support System using Simple Additive Weight (SAW)
 1. Go v1.19
 2. Fiber
 3. MySQL
+4. Docker
+5. golang-migrate
 
 ## How To Use
-1. Install MySQL
-2. Run Init Table Structure DDL at driver/mysql/migrations
-3. Run app using command
+1. Install Docker & Docker Compose
+2. Run app using docker with command
 ```
-$ go run main.go
+$ docker-compose up --build
 ```

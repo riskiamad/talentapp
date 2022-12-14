@@ -1,6 +1,7 @@
 package delivery
 
 import (
+	"fmt"
 	"github.com/gofiber/fiber/v2"
 	"net/http"
 	"talentapp/model"
@@ -79,6 +80,7 @@ func (h *recruitmentDelivery) PostRecruitment(ctx *fiber.Ctx) error {
 	}
 
 	if ok, err = utils.IsRequestValid(payload); !ok {
+		fmt.Println(err)
 		return ctx.Status(http.StatusBadRequest).JSON(fiber.Map{
 			"message": "bad request",
 			"error":   utils.CustomValidator(err),

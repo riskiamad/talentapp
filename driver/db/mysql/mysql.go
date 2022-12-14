@@ -16,7 +16,7 @@ func ConnectDB() *sql.DB {
 	host := os.Getenv("MYSQL_HOST")
 	port := os.Getenv("MYSQL_PORT")
 
-	db, err := sql.Open("mysql", user+":"+pass+"@tcp("+host+":"+port+")/"+dbname+"?parseTime=true")
+	db, err := sql.Open("mysql", user+":"+pass+"@tcp("+host+":"+port+")/"+dbname+"?parseTime=true&multiStatements=true")
 	if err != nil {
 		panic(err)
 	}

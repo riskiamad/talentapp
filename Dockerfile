@@ -18,6 +18,7 @@ COPY --from=build /go/src/app/bin /go/bin
 COPY --from=build /go/src/app/.env ./.env
 COPY --from=build /go/src/app/templates ./templates
 COPY --from=build /go/src/app/assets ./assets
+COPY --from=build /go/src/app/driver/db/mysql/migrations ./migrations
 
 EXPOSE 8000
 

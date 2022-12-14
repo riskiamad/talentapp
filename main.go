@@ -1,12 +1,16 @@
 package main
 
 import (
+	"database/sql"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/gofiber/template/html"
+	"github.com/golang-migrate/migrate/v4"
+	mysqlMigrate "github.com/golang-migrate/migrate/v4/database/mysql"
+	_ "github.com/golang-migrate/migrate/v4/source/file"
 	"github.com/joho/godotenv"
+	_ "github.com/mattes/migrate/source/file"
 	"log"
-	"os"
 	"talentapp/delivery"
 	"talentapp/driver/db/mysql"
 	"talentapp/handler"
@@ -14,16 +18,38 @@ import (
 	"talentapp/usecase"
 )
 
+var db *sql.DB
+
 func init() {
 	err := godotenv.Load()
 	if err != nil {
 		panic(err)
 	}
+
+	db = mysql.ConnectDB()
+
+	dbInstance, err := mysqlMigrate.WithInstance(db, &mysqlMigrate.Config{})
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	m, err := migrate.NewWithDatabaseInstance(
+		"file://migrations",
+		"mysql",
+		dbInstance,
+	)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	if err = m.Up(); err != nil {
+		log.Fatal(err)
+	}
+	defer m.Close()
+
 }
 
 func main() {
-	db := mysql.ConnectDB()
-
 	engine := html.New("./templates", ".html")
 
 	app := fiber.New(fiber.Config{
@@ -75,7 +101,7 @@ func main() {
 	jobHandler.Router(app)
 	candidateHandler.Router(app)
 
-	err := app.Listen(":" + os.Getenv("PORT"))
+	err := app.Listen("0.0.0.0:8000")
 	if err != nil {
 		log.Fatal(err)
 	}
