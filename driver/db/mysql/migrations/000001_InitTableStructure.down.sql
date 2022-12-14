@@ -1,0 +1,11 @@
+START TRANSACTION;
+
+DROP TABLE IF EXISTS `candidate_score`;
+
+DROP TABLE IF EXISTS `recruitment`;
+
+DROP TABLE IF EXISTS `job`;
+
+DROP TABLE IF EXISTS `candidate`;
+
+COMMIT;
