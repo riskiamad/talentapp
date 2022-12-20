@@ -45,8 +45,8 @@ func (r *candidateScoreRepository) PostCandidateScore(ctx context.Context, model
 
 func (r *candidateScoreRepository) GetCandidateScoreListByRecruitmentID(ctx context.Context, recruitmentID string) (*[]model.CandidateScore, error) {
 	var result []model.CandidateScore
-	SQL := "SELECT id, candidate_id, recruitment_id, willing_to_relocate_score, attitude_score, skill_score, experience_score, cast(overall_score as decimal(5,2)) FROM candidate_score WHERE recruitment_id = ? ORDER BY ? DESC LIMIT ? OFFSET ?"
-	rows, err := r.DB.QueryContext(ctx, SQL, recruitmentID, "overall_score", 10, 0) // TODO: make dynamic pagination
+	SQL := "SELECT id, candidate_id, recruitment_id, willing_to_relocate_score, attitude_score, skill_score, experience_score, cast(overall_score as decimal(5,2)) FROM candidate_score WHERE recruitment_id = ? ORDER BY overall_score DESC LIMIT ? OFFSET ?"
+	rows, err := r.DB.QueryContext(ctx, SQL, recruitmentID, 10, 0) // TODO: make dynamic pagination
 	if err != nil {
 		return nil, err
 	}
